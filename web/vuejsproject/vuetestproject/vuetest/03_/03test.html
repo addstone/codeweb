@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03_</title>
+</head>
+<body>
+
+<div id="demo">
+    姓:<input type="text" placeholder="First Name" v-model="firstName"><br>
+    名:<input type="text" placeholder="Last Name" v-model="lastName"><br>
+    姓名1(单向):<input type="text" placeholder="Full Name" v-model="fullName1"><br>
+    姓名2(单向):<input type="text" placeholder="Full Name" v-model="fullName2"><br>
+    姓名3(双向):<input type="text" placeholder="Full Name"><br>
+</div>
+
+
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+   const vm = new Vue({
+        el:'#demo',
+        data:{
+            firstName:'A',
+            lastName:'B',
+            fullName:'A B'
+
+        },
+        computed:{ // 计算属性
+            fullName1 () {   // 计算属性 返回值作为属性值.
+                console.log('firstName1()')
+                return this.firstName + ' ' + this.lastName
+            }
+        },
+        watch:{     // 配置监视
+            firstName:function (value) {
+                console.log(this)
+                this.fullName2 = value + ' ' + this.lastName
+            }
+        }
+    })
+    //
+    vm.$watch('lastName',function (value) {
+        this.fullName2 = this.firstName() + '' + value
+        
+    })
+
+</script>
+
+
+</body>
+</html>
