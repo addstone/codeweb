@@ -30,8 +30,9 @@
 </div>
 
 
-
-<script type="text/javascript" src="../js/vue.js">
+<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.5.0/dist/vue.js">-->
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
 
    const vm = new Vue({
        el:'#demo',
@@ -62,7 +63,7 @@
         watch:{     
 			// 配置监视firstName
             firstName:function (value) { // 相当于属性的set
-                console.log(this)
+                console.log(this)   // 就是vm对象
                 // 更新fullName2
                 this.fullName2 = value + ' ' + this.lastName
             }
@@ -72,7 +73,7 @@
     //监视lastName
     vm.$watch('lastName',function(value) {
         // 更新fullName2
-        this.fullName2 = this.firstName() + '' + value
+        this.fullName2 = this.firstName() + ' ' + value
 
     })
 
