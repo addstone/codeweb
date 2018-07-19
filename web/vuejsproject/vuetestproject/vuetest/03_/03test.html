@@ -27,7 +27,8 @@
        data:{
             firstName:'A',
             lastName:'B',
-            fullName2:'A B'
+            fullName2:'A B',
+            fullName3:'A B'
         },
         computed:{  // 计算属性
             fullName1 () {   // 计算属性 返回值作为属性值.
@@ -42,7 +43,7 @@
            },
            // 回调函数 监视属性值发生改变时更新相关的属性数据
            set(value){  // value 最新属性值
-               const  names = value.space(' ')
+               const  names = value.split(' ')
                this.firstName = names[0]
                this.lastName = names[1]
            }
