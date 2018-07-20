@@ -30,7 +30,7 @@
 </div>
 
 
-<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.5.0/dist/vue.js">-->
+<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.5.0/dist/vue.js"></script>-->
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
 
@@ -46,20 +46,20 @@
             fullName1 () {   // 属性的get().
                 console.log('firstName1()')
                 return this.firstName + ' ' + this.lastName
+            },
+            fullName3:{
+                // 当获取当前属性值时自动调用, 将返回值(根据相关的其它属性数据)作为属性值
+                get(){
+                    return this.firstName + ' ' + this.lastName
+                },
+                // 回调函数 当属性值发生了改变时自动调用, 监视当前属性值变化, 同步更新相关的其它属性值
+                set(value){  // value 最新属性值
+                    const  names = value.split(' ')
+                    this.firstName = names[0]
+                    this.lastName = names[1]
+                }
             }
         },
-       fullName3:{
-           // 当获取当前属性值时自动调用, 将返回值(根据相关的其它属性数据)作为属性值
-           get(){
-               return this.firstName + ' ' + this.lastName
-           },
-           // 回调函数 当属性值发生了改变时自动调用, 监视当前属性值变化, 同步更新相关的其它属性值
-           set(value){  // value 最新属性值
-               const  names = value.split(' ')
-               this.firstName = names[0]
-               this.lastName = names[1]
-           }
-       },
         watch:{     
 			// 配置监视firstName
             firstName:function (value) { // 相当于属性的set
