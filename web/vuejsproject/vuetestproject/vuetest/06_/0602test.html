@@ -14,9 +14,9 @@
         </li>
     </ul>
 
-    <button>年龄升序</button>
-    <button>年龄降序</button>
-    <button>原本顺序</button>
+    <button @click="setOrderType(1)">年龄升序</button>
+    <button @click="setOrderType(2)">年龄降序</button>
+    <button @click="setOrderType(0)">原本顺序</button>
 
 </div>
 
@@ -27,6 +27,7 @@ new Vue({
     el:'#test',
     data:{
         searchName:'',
+        orderType:0,// 0代表不排序, 1代表降序, 2代表升序
         persons: [
             {name: 'Tom', age:18},
             {name: 'Jack', age:17},
@@ -36,10 +37,27 @@ new Vue({
     },
     computed:{
         filterPersons(){
-            const {searchName,persons} = this
+            const {searchName,persons,orderType} = this
             let fPersons;
-            fPersons = persons.filter(p => p.name.indexOf(searchName) != -1)
+            // 过滤
+            fPersons = persons.filter(p => p.name.indexOf(searchName) !== -1);
+            // 排序
+            if (orderType!==0){
+                fPersons.sort(function (p1,p2) {
+                    if (orderType===2){
+                        return p2.age - p1.age
+                    }else {
+                        return p1.age - p2.age
+                    }
+
+                })
+            }
             return fPersons
+        }
+    },
+    methods:{
+        setOrderType(orderType){
+            this.orderType = orderType
         }
     }
 })
